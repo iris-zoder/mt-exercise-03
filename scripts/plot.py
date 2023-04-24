@@ -53,7 +53,8 @@ def main():
             # make sure columns are sorted by dropout setting
             df.sort_index(axis=1, inplace=True)
             # shift indexes to match epochs, drop empty rows
-            df = df.shift().dropna()
+            df.index += 1
+            df = df.dropna()
 
             if ppl != "test perplexity":
                 ax = sns.lineplot(data=df)
@@ -67,8 +68,8 @@ def main():
             df.index.name = ppl
             out_handle.write(tabulate(df, headers="keys", stralign="right", numalign="right", floatfmt=".3f") + "\n\n")
 
-        out_handle.write(f"The highest perplexity occurs with {test_ppls.dropna().idxmax(axis=1).loc[0]} and the lowest "
-                         f"with {test_ppls.dropna().idxmin(axis=1).loc[0]}.")
+        out_handle.write(f"The highest perplexity occurs with {test_ppls.dropna().idxmax(axis=1).loc[1]} and the lowest "
+                         f"with {test_ppls.dropna().idxmin(axis=1).loc[1]}.")
 
 
 if __name__ == "__main__":
