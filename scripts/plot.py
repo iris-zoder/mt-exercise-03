@@ -58,7 +58,7 @@ def main():
 
             if ppl != "test perplexity":
                 ax = sns.lineplot(data=df)
-                ax.set(xlabel="Number of Epochs", ylabel="Perplexity", title=ppl)
+                ax.set(xlabel="Number of Epochs", xlim=(1, 40), ylabel="Perplexity", title=ppl)
                 plt.legend(title="Dropout rate")
                 plt.savefig(os.path.join(args.output_directory, ppl.replace(" ", "_") + "_plot.pdf"))
                 plt.close()
